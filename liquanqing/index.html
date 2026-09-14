@@ -995,9 +995,8 @@ function addPhotoToScene(texture) {
             const dIndex = dist(8,0), dMiddle = dist(12,0), dRing = dist(16,0), dPinky = dist(20,0), dThumb = dist(4,0);
             const palmSize = dist(0, 9);
 
-            // 👉 比八(大拇指 + 食指张开，其余三指收起)= 打开书信
-            const isEight = dThumb > palmSize * 0.5 && dIndex > palmSize * 0.8 && dMiddle < dIndex * 0.7 && dRing < dIndex * 0.7 && dPinky < dIndex * 0.7;
-            if (isEight) {
+            // 👌 OK 手势(拇指 + 食指捏成圈，其余三指伸直)= 打开书信
+            if (dist(4,8) < 0.05 && dMiddle > 0.15 && dMiddle > dIndex * 1.2) {
                 if (Date.now() - STATE.letterLastTriggerTime > 1000) { STATE.letterLastTriggerTime = Date.now(); enterLetterMode(); }
                 return;
             }
