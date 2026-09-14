@@ -494,6 +494,11 @@
                 }
                 this.mesh.position.lerp(_tempVec, lerpSpeed * dt);
 
+                // 照片始终面向镜头，否则只有正对镜头的照片可见
+                if (this.type === 'PHOTO' && mode !== 'FOCUS' && mode !== 'BLESSING') {
+                    this.mesh.lookAt(camera.position);
+                }
+
                 if (this.hasEmissive && mode === 'TREE' && !this.isDust) {
                     const blink = Math.sin(time * 2 + this.offset);
                     this.mesh.material.emissiveIntensity = blink > 0.5 ? (1.0 + (blink - 0.5) * 2.5) : 0.4;
